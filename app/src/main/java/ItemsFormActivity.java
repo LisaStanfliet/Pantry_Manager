@@ -1,0 +1,138 @@
+import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.pantry_manager.R;
+
+public class ItemsFormActivity extends AppCompatActivity {
+    private EditText editName,editQuantity, editExpiryDate;
+    private Spinner spinnerUnit;
+    private Database database;
+
+    //the -1 means that there is a new ingredient being added.
+    private int ingredientId = -1;
+
+    private final String[] units = { "pieces", "g","kg", "ml", "l","cups", "tbsp", "tsp"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_items_form);
+
+        //Initialize database
+        database = new Database(this);
+
+        //Connect Java to XML
+        editName = findViewById(R.id.editName);
+        editQuantity = findViewById(R.id.editQuantity);
+        editExpiryDate = findViewById(R.id.editExpiryDate);
+        spinnerUnit = findViewById(R.id.spinnerUnit);
+        TextView title = findViewById(R.id.title);
+        Button saveBtn = findViewById(R.id.saveBtn);
+        Button cancelBtn = findViewById(R.id.cancelBtn);
+
+        //Populate the spinner with units
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, units);
+        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(unitAdapter);
+
+        //Check if existing ingredient is being edited
+        ingredientId = getIntent().getIntExtra("INGREDIENT_ID", -1);
+        if (ingredientId != -1) {
+            title.setText("Edit Item");
+            //Load ingredient details
+            loadIngredient();
+        } else {
+            title.setText("Add Item");
+        }
+
+        //Button listeners
+        saveBtn.setOnClickListener(v -> saveIngredient());
+        cancelBtn.setOnClickListener(v -> finish());
+    }
+
+    //Load existing ingredient details
+    private void loadIngredient() {
+        Items item = database.getItem(ingredientId);
+        if (item == null) {
+            Toast.makeText(this, "Ingredient not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        editName.setText(item.getName());
+        editQuantity.setText(String.valueOf(item.getQuantity()));
+        editExpiryDate.setText(item.getExpiryDate());
+
+        //Select unit from ingredient
+        for (int i = 0; i < units.length; i++) {
+            if (units[i].equalsIgnoreCase(item.getUnit())) {
+                spinnerUnit.setSelection(i);
+                break;
+            }
+
+        }
+    }
+
+    private void saveIngredient() {
+        String name = editName.getText().toString();
+        String quantityText = editQuantity.getText().toString();
+        String expiryDate = editExpiryDate.getText().toString();
+        String unit = spinnerUnit.getSelectedItem().toString();
+
+        //Validation
+        if (name.isEmpty()) {
+            editName.setError("Ingredient name is required");
+            return;
+        }
+        if (quantityText.isEmpty()) {
+            editQuantity.setError("Quantity is required");
+            return;
+        }
+        if (!expiryDate.isEmpty() && !expiryDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            editExpiryDate.setError("Use YYYY-MM-DD format");
+            return;
+        }
+        final double quantity;
+        try {
+            quantity = Double.parseDouble(quantityText);
+        } catch (NumberFormatException e) {
+            editQuantity.setError("Invalid quantity");
+            return;
+        }
+        if (quantity <= 0) {
+            editQuantity.setError("Quantity must be greater than 0");
+            return;
+        }
+        if (spinnerUnit.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, "Please select a unit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        boolean success;
+        if (ingredientId == -1) {
+            success = database.addItem(name, quantity, expiryDate, unit);
+        }else {
+            success = database.updateItem(ingredientId, name, quantity, expiryDate, unit);
+        }
+
+        Toast.makeText(this,success ? "Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();
+        if (success) {
+            finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (database !=null){
+            database.close();
+        }
+
+        super.onDestroy();
+    }
+}

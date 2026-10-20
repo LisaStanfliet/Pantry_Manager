@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Pantry_Manager</string>
+    <string name="add_item">Add Item</string>
+    <string name="ingredient_name">Ingredient Name</string>
+    <string name="expiry_date_yyyy_mm_dd">Expiry Date(YYYY-MM-DD)</string>
+    <string name="quantity_more_than_0">Quantity(more than 0)</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
