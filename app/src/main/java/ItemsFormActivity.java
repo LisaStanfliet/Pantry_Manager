@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,10 +17,11 @@ public class ItemsFormActivity extends AppCompatActivity {
     private Database database;
 
     //the -1 means that there is a new ingredient being added.
-    private int ingredientId = -1;
+    private int itemId = -1;
 
     private final String[] units = { "pieces", "g","kg", "ml", "l","cups", "tbsp", "tsp"};
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,8 @@ public class ItemsFormActivity extends AppCompatActivity {
         spinnerUnit.setAdapter(unitAdapter);
 
         //Check if existing ingredient is being edited
-        ingredientId = getIntent().getIntExtra("INGREDIENT_ID", -1);
-        if (ingredientId != -1) {
+        itemId = getIntent().getIntExtra("ITEM_ID", -1);
+        if (itemId != -1) {
             title.setText("Edit Item");
             //Load ingredient details
             loadIngredient();
@@ -59,7 +61,7 @@ public class ItemsFormActivity extends AppCompatActivity {
 
     //Load existing ingredient details
     private void loadIngredient() {
-        Items item = database.getItem(ingredientId);
+        Items item = database.getItem(itemId);
         if (item == null) {
             Toast.makeText(this, "Ingredient not found", Toast.LENGTH_SHORT).show();
             finish();
@@ -115,10 +117,10 @@ public class ItemsFormActivity extends AppCompatActivity {
         }
 
         boolean success;
-        if (ingredientId == -1) {
+        if (itemId == -1) {
             success = database.addItem(name, quantity, expiryDate, unit);
         }else {
-            success = database.updateItem(ingredientId, name, quantity, expiryDate, unit);
+            success = database.updateItem(itemId, name, quantity, expiryDate, unit);
         }
 
         Toast.makeText(this,success ? "Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();

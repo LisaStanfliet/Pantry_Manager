@@ -6,4 +6,8 @@
     <string name="quantity_more_than_0">Quantity(more than 0)</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="pantry">Pantry</string>
+    <string name="your_saved_ingredients">Your saved Ingredients</string>
+    <string name="find_recipes">Find recipes</string>
+    <string name="settings">settings</string>
 </resources>
