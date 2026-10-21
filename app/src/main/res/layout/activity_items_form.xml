@@ -6,9 +6,8 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
         android:background = "#F5F7F4">
         <TextView
             android:layout_width="match_parent"
@@ -25,19 +24,9 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
             android:textSize="16sp"
+            android:textColor="#000000"
             android:autofillHints="Ingredient Name"
             android:hint="@string/ingredient_name" />
-
-        <EditText
-            android:id="@+id/editExpiryDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="Expiry Date(YYYY-MM-DD)"
-            android:hint="@string/expiry_date_yyyy_mm_dd"
-            android:inputType="date"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="236dp" />
 
         <EditText
             android:id="@+id/editQuantity"
@@ -48,6 +37,7 @@
             android:inputType="numberDecimal"
             android:textSize="16sp"
             tools:layout_editor_absoluteX="0dp"
+            android:textColor="#000000"
             tools:layout_editor_absoluteY="160dp" />
 
         <Spinner
@@ -57,6 +47,18 @@
             android:entries="@array/units"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="333dp" />
+
+        <EditText
+            android:id="@+id/editExpiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Expiry Date(YYYY-MM-DD)"
+            android:hint="@string/expiry_date_yyyy_mm_dd"
+            android:inputType="date"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="236dp" />
 
         <Button
             android:id="@+id/saveBtn"

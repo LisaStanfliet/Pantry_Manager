@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,16 +53,22 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ItemViewHo
         //Delete after confirming
         holder.delete.setOnClickListener(v ->
                 new AlertDialog.Builder(context)
-                        .setTitle("Delete com.example.pantry_manager.Ingredient")
+                        .setTitle("Delete Item?")
                         .setMessage("Are you sure you want to delete this pantry item?")
                         .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                         .setPositiveButton("Delete", (dialog, which) -> {
-                            database.deleteItem(item.getId());
+                            boolean deleted = database.deleteItem(item.getId());
                             //Checks if item still has a valid position in the list
-                            int currentPosition = holder.getAdapterPosition();
-                            if (currentPosition != RecyclerView.NO_POSITION) {
-                                items.remove(currentPosition);
-                                notifyItemRemoved(currentPosition);
+                            if (deleted) {
+                                int currentPosition = holder.getAdapterPosition();
+
+                                if (currentPosition != RecyclerView.NO_POSITION) {
+                                    items.remove(currentPosition);
+                                    notifyItemRemoved(currentPosition);
+                                }
+                                Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error deleting item", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .show());

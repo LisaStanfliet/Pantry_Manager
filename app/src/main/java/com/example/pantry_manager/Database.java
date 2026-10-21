@@ -57,7 +57,12 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         try (Cursor cursor = db.rawQuery("SELECT * FROM items ORDER BY name", null)) {
             while (cursor.moveToNext()) {
-                items.add(new Items(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
+                items.add(new Items(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3),
+                        cursor.getString(4)));
             }
         }
         return items;
@@ -68,7 +73,12 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         try (Cursor cursor = db.query("items", new String[]{"id", "name", "quantity", "unit", "expiry_date"}, "id=?", new String[]{String.valueOf(id)}, null, null, null)) {
             if (cursor.moveToFirst()) {
-                return new Items(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4));
+                return new Items(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3),
+                        cursor.getString(4));
             }
         }
         return null;

@@ -50,8 +50,10 @@ public class ItemsFormActivity extends AppCompatActivity {
             title.setText("Edit Item");
             //Load ingredient details
             loadIngredient();
+            saveBtn.setText("Update");
         } else {
             title.setText("Add Item");
+            saveBtn.setText("Save");
         }
 
         //Button listeners
@@ -63,13 +65,13 @@ public class ItemsFormActivity extends AppCompatActivity {
     private void loadIngredient() {
         Items item = database.getItem(itemId);
         if (item == null) {
-            Toast.makeText(this, "com.example.pantry_manager.Ingredient not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingredient not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
         editName.setText(item.getName());
         editQuantity.setText(String.valueOf(item.getQuantity()));
-        editExpiryDate.setText(item.getExpiryDate());
+        editExpiryDate.setText(item.getExpiryDate()== null ? "" : item.getExpiryDate());
 
         //Select unit from ingredient
         for (int i = 0; i < units.length; i++) {
@@ -89,41 +91,44 @@ public class ItemsFormActivity extends AppCompatActivity {
 
         //Validation
         if (name.isEmpty()) {
-            editName.setError("com.example.pantry_manager.Ingredient name is required");
+            editName.setError("Ingredient name is required");
             return;
         }
         if (quantityText.isEmpty()) {
             editQuantity.setError("Quantity is required");
             return;
         }
-        if (!expiryDate.isEmpty() && !expiryDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            editExpiryDate.setError("Use YYYY-MM-DD format");
-            return;
-        }
+
         final double quantity;
         try {
             quantity = Double.parseDouble(quantityText);
         } catch (NumberFormatException e) {
-            editQuantity.setError("Invalid quantity");
+            editQuantity.setError("Enter valid quantity");
+            editQuantity.requestFocus();
             return;
         }
         if (quantity <= 0) {
             editQuantity.setError("Quantity must be greater than 0");
             return;
         }
-        if (spinnerUnit.getSelectedItemPosition() == 0) {
+        if (!expiryDate.isEmpty() && !expiryDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            editExpiryDate.setError("Use YYYY-MM-DD format");
+            editExpiryDate.requestFocus();
+            return;
+        }
+        if (spinnerUnit.getSelectedItemPosition() == -1) {
             Toast.makeText(this, "Please select a unit", Toast.LENGTH_SHORT).show();
             return;
         }
 
         boolean success;
         if (itemId == -1) {
-            success = database.addItem(name, quantity, expiryDate, unit);
+            success = database.addItem(name, quantity,  unit, expiryDate);
         }else {
-            success = database.updateItem(itemId, name, quantity, expiryDate, unit);
+            success = database.updateItem(itemId, name, quantity, unit, expiryDate);
         }
 
-        Toast.makeText(this,success ? "com.example.pantry_manager.Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,success ? "Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();
         if (success) {
             finish();
         }
