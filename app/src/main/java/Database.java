@@ -28,7 +28,7 @@ public class Database extends SQLiteOpenHelper {
         // Create the recipes table
         db.execSQL("CREATE TABLE recipes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, instructions TEXT NOT NULL)");
         // Create the ingredients table
-        db.execSQL("CREATE TABLE ingredients (id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_id INTEGER NOT NULL, ingredient_name INTEGER NOT NULL, quantity REAL NOT NULL, unit TEXT NOT NULL, FOREIGN KEY(recipe_id) REFERENCES recipes(id) ON DELETE CASCADE)");
+        db.execSQL("CREATE TABLE ingredients (id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_id INTEGER NOT NULL, ingredient_name TEXT NOT NULL, quantity REAL NOT NULL, unit TEXT NOT NULL, FOREIGN KEY(recipe_id) REFERENCES recipes(id) ON DELETE CASCADE)");
 
         //Insert the initial recipes and their ingredients.
         seedRecipes(db);
@@ -90,12 +90,12 @@ public class Database extends SQLiteOpenHelper {
     }
 
     //Get one recipe and all its ingredients using its ID.
-    public Recipes getRecipe(int recipeId) {
+    public Recipe getRecipe(int recipeId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String name;
         String instructions;
         //Retrieve the recipe details.
-        try (Cursor cursor = db.query("recipes", new String[]{"id", "name", "instructions"}, "recipeId=?", new String[]{String.valueOf(recipeId)}, null, null, null)) {
+        try (Cursor cursor = db.query("recipes", new String[]{"id", "name", "instructions"}, "id=?", new String[]{String.valueOf(recipeId)}, null, null, null)) {
             //Return null if it does not exist.
             if (!cursor.moveToFirst()) {
                 return null;
@@ -105,18 +105,18 @@ public class Database extends SQLiteOpenHelper {
 
         }
         //Retrieve the ingredients belonging to the recipe.
-        List<Ingredients> ingredients = new ArrayList<>();
+        List<Ingredient> ingredients = new ArrayList<>();
         try (Cursor cursor = db.query("ingredients", new String[]{"id","recipe_id", "ingredient_name", "quantity", "unit"}, "recipe_id=?", new String[]{String.valueOf(recipeId)}, null, null, "ingredient_name ASC")) {
             while (cursor.moveToNext()) {
-                ingredients.add(new Ingredients(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getDouble(3), cursor.getString(4)));
+                ingredients.add(new Ingredient(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getDouble(3), cursor.getString(4)));
             }
         }
         //Return the recipe and its ingredients.
-        return new Recipes(recipeId, name, instructions, ingredients);
+        return new Recipe(recipeId, name, instructions, ingredients);
     }
 
     //Get all recipes, the ingredients are loaded with the recipe for matching
-    public List<Recipes> getAllRecipes() {
+    public List<Recipe> getAllRecipes() {
         List<Integer> ids = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         try (Cursor cursor = db.rawQuery("SELECT id FROM recipes", null)) {
@@ -124,9 +124,9 @@ public class Database extends SQLiteOpenHelper {
                 ids.add(cursor.getInt(0));
             }
         }
-        List<Recipes> recipes = new ArrayList<>();
+        List<Recipe> recipes = new ArrayList<>();
         for (int id : ids) {
-            Recipes recipe = getRecipe(id);
+            Recipe recipe = getRecipe(id);
             if (recipe != null) {
                 recipes.add(recipe);
             }

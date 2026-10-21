@@ -13,18 +13,18 @@ public class RecipeMatcher {
     }
 
     public static boolean canMakeRecipe(Recipe recipe, List<Items> items) {
-        //Combine multiple pantry items into one with item name and base unit
         Map<String, Double> availableItems = new HashMap<>();
+        //Combine multiple pantry items into one with item name and base unit
         for (Items item : items) {
             String name = normalizeName(item.getName());
             String unit = normalizeUnit(item.getUnit());
             double quantity = baseQuantity(item.getQuantity(), item.getUnit());
             String key = name +"|"+ unit;
-            available.put(key, availableItems.getOrDefault(key, 0.0) + quantity);
+            availableItems.put(key, availableItems.getOrDefault(key, 0.0) + quantity);
         }
 
         //Rejects recipe if anything is missing or not enough of an ingredient
-        for (RecipeItem requiredItem : recipe.getItems()) {
+        for (Ingredient requiredItem : recipe.getIngredients()) {
             String name = normalizeName(requiredItem.getName());
             String unit = normalizeUnit(requiredItem.getUnit());
             String key = name +"|"+ unit;

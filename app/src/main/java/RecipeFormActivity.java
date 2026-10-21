@@ -37,7 +37,7 @@ public class RecipeFormActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         List<Recipe> allRecipes = database.getAllRecipes();
-        List<Items> items = database.getAllItems(allRecipes);
+        List<Items> items = database.getAllItems();
         List<Recipe> matches = RecipeMatcher.findMatches(allRecipes, items);
 
         if(matches.isEmpty()){

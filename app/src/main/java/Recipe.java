@@ -5,17 +5,17 @@ public class Recipe {
     private final int id;
     private final String name;
     private final String instructions;
-    private final List<RecipeItem> ingredients;
+    private final List<Ingredient> ingredients;
 
-    public Recipe(int id, String name, String instructions, List<RecipeItem> Items) {
+    public Recipe(int id, String name, String instructions, List<Ingredient> ingredients) {
         this.id = id;
         this.name = name;
         this.instructions = instructions;
-        this.items = items == null ? new ArrayList<>() : Items;
+        this.ingredients = ingredients;
     }
 
     public int getId() { return id; }
     public String getName() { return name; }
     public String getInstructions() { return instructions; }
-    public List<RecipeItem> getItems() { return items; }
+    public List<Ingredient> getIngredients() { return ingredients;}
 }
