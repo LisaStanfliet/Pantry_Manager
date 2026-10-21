@@ -10,4 +10,23 @@
     <string name="your_saved_ingredients">Your saved Ingredients</string>
     <string name="find_recipes">Find recipes</string>
     <string name="settings">settings</string>
+    <string name="Recipes">recipes</string>
+    <string name="recipes_found">recipes_found</string>
+    <string name="back">back_to_pantry</string>
+    <string name="recipe_summary">recipe_summary</string>
+    <string name="view_recipe">view_recipe</string>
+    <string name="expiry_soon">Expiry_soon</string>
+    <string name="saves_perferences_to_device">Saves perferences to device.</string>
+    <string name="saves_preferences_to_device">Saves preferences to device</string>
+    <string name="back_to_pantry">Back to pantry</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="recipe_instructions">Instructions</string>
+    <string name="required_ingredients">Required Ingredients</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="preparation">Preparation</string>
+    <string name="item_name">Item name</string>
+    <string name="item_quantity">item quantity</string>
+    <string name="item_expirydate">item_expirydate</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

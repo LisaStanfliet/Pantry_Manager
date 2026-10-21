@@ -1,4 +1,5 @@
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class SettingsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch expirySwitch = findViewById(R.id.expirySwitch);
         Button back = findViewById(R.id.backSettings);
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
