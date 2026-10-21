@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/expiryDate"
-            android:text = "@string/item_expirydate"
+            android:text = "@string/item_expiryDate"
             android:textSize="13sp"/>
 
         <LinearLayout

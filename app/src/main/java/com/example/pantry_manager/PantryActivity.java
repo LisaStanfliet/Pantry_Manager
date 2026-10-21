@@ -32,9 +32,12 @@ public class PantryActivity extends AppCompatActivity {
         Button suggestBtn = findViewById(R.id.suggestBtn);
         Button settingsBtn = findViewById(R.id.settingsBtn);
 
-        addBtn.setOnClickListener(v -> startActivity(new Intent(this, ItemsFormActivity.class)));
-        suggestBtn.setOnClickListener(v -> startActivity(new Intent(this, RecipeFormActivity.class)));
-        settingsBtn.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
+        addBtn.setOnClickListener (v -> {Intent intent = new Intent(PantryActivity.this, ItemsFormActivity.class);
+            startActivity(intent);});
+        suggestBtn.setOnClickListener(v -> {Intent intent = new Intent(PantryActivity.this, RecipeFormActivity.class);
+            startActivity(intent);});
+        settingsBtn.setOnClickListener(v -> {Intent intent = new Intent(PantryActivity.this, SettingsActivity.class);
+            startActivity(intent);});
     }
 
     @Override

@@ -11,6 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pantry_Manager">
+        <activity android:name=".ItemsFormActivity"
+            android:exported="false"/>
+
+        <activity android:name=".RecipeFormActivity"
+            android:exported="false"/>
+
+        <activity android:name=".SettingsActivity"
+            android:exported="false"/>
+
+        <activity android:name=".RecipeViewActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".PantryActivity"
             android:exported="true"
