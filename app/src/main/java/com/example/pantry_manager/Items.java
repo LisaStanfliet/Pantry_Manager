@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 //Model class representing one pantry item
 public class Items {
     private final int id;

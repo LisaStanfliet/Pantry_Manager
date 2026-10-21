@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,10 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.*;
 
-import com.example.pantry_manager.R;
-
 //Main screen: it loads the saved pantry and opens other screens
-public class Pantry extends AppCompatActivity {
+public class PantryActivity extends AppCompatActivity {
     private RecyclerView recyclerPantry;
     private Database database;
     private TextView pantryHint;

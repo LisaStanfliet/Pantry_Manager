@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -8,8 +10,6 @@ import android.widget.Toast;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.pantry_manager.R;
 
 public class ItemsFormActivity extends AppCompatActivity {
     private EditText editName,editQuantity, editExpiryDate;
@@ -63,7 +63,7 @@ public class ItemsFormActivity extends AppCompatActivity {
     private void loadIngredient() {
         Items item = database.getItem(itemId);
         if (item == null) {
-            Toast.makeText(this, "Ingredient not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "com.example.pantry_manager.Ingredient not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -89,7 +89,7 @@ public class ItemsFormActivity extends AppCompatActivity {
 
         //Validation
         if (name.isEmpty()) {
-            editName.setError("Ingredient name is required");
+            editName.setError("com.example.pantry_manager.Ingredient name is required");
             return;
         }
         if (quantityText.isEmpty()) {
@@ -123,7 +123,7 @@ public class ItemsFormActivity extends AppCompatActivity {
             success = database.updateItem(itemId, name, quantity, expiryDate, unit);
         }
 
-        Toast.makeText(this,success ? "Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,success ? "com.example.pantry_manager.Ingredient saved" : "Error saving ingredient", Toast.LENGTH_SHORT).show();
         if (success) {
             finish();
         }

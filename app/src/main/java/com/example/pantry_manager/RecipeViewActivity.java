@@ -1,11 +1,11 @@
+package com.example.pantry_manager;
+
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.pantry_manager.R;
 
 public class RecipeViewActivity extends AppCompatActivity {
     private Database database;
@@ -26,7 +26,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         int recipeId = getIntent().getIntExtra("RECIPE_ID", -1);
 
         if (recipeId == -1) {
-            Toast.makeText(this, "Recipe not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "com.example.pantry_manager.Recipe not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -34,7 +34,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         //Load the recipe details
         Recipe recipe = database.getRecipe(recipeId);
         if (recipe == null) {
-            Toast.makeText(this, "Recipe not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "com.example.pantry_manager.Recipe not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }

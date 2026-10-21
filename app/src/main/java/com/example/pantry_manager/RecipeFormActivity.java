@@ -1,17 +1,15 @@
+package com.example.pantry_manager;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.*;
-
-import com.example.pantry_manager.R;
 
 public class RecipeFormActivity extends AppCompatActivity {
     private Database database;

@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 public class Ingredient {
     private final int id;
     private final int recipeId;

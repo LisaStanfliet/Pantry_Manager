@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.*;
-
-import com.example.pantry_manager.R;
 
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ItemViewHolder> {
     private final Context context;
@@ -52,13 +52,13 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ItemViewHo
         //Delete after confirming
         holder.delete.setOnClickListener(v ->
                 new AlertDialog.Builder(context)
-                        .setTitle("Delete Ingredient")
+                        .setTitle("Delete com.example.pantry_manager.Ingredient")
                         .setMessage("Are you sure you want to delete this pantry item?")
                         .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                         .setPositiveButton("Delete", (dialog, which) -> {
                             database.deleteItem(item.getId());
                             //Checks if item still has a valid position in the list
-                            int currentPosition = holder.getBindingAdapterPosition();
+                            int currentPosition = holder.getAdapterPosition();
                             if (currentPosition != RecyclerView.NO_POSITION) {
                                 items.remove(currentPosition);
                                 notifyItemRemoved(currentPosition);

@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;

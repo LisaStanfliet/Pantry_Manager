@@ -54,7 +54,7 @@
             android:id="@+id/spinnerUnit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="units"
+            android:entries="@array/units"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="333dp" />
 

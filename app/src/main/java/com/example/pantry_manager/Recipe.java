@@ -1,3 +1,5 @@
+package com.example.pantry_manager;
+
 import java.util.*;
 
 //Model class for recipes

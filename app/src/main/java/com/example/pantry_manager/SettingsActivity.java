@@ -1,3 +1,4 @@
+package com.example.pantry_manager;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -6,8 +7,6 @@ import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.pantry_manager.R;
 
 public class SettingsActivity extends AppCompatActivity{
     private static final String PREFS_NAME = "settings_prefs";
