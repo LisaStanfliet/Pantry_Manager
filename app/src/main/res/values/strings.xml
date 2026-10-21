@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pantry_Manager</string>
+    <string name="app_name">Pantry Manager</string>
     <string name="add_item">Add Item</string>
     <string name="ingredient_name">Ingredient Name</string>
     <string name="expiry_date_yyyy_mm_dd">Expiry Date(YYYY-MM-DD)</string>
@@ -11,11 +11,11 @@
     <string name="find_recipes">Find recipes</string>
     <string name="settings">settings</string>
     <string name="recipes">Recipes</string>
-    <string name="recipes_found">recipes_found</string>
+    <string name="recipes_found">Recipes Found</string>
     <string name="back">Back to pantry</string>
-    <string name="recipe_summary">recipe_summary</string>
-    <string name="view_recipe">view_recipe</string>
-    <string name="expiry_soon">Expiry_soon</string>
+    <string name="recipe_summary">Recipe Summary</string>
+    <string name="view_recipe">View Recipe</string>
+    <string name="expiry_soon">Expiry soon</string>
     <string name="saves_preferences_to_device">Saves preferences to device</string>
     <string name="back_to_pantry">Back to pantry</string>
     <string name="recipe_name">Recipe Name</string>
@@ -25,7 +25,7 @@
     <string name="preparation">Preparation</string>
     <string name="item_name">Item name</string>
     <string name="item_quantity">item quantity</string>
-    <string name="item_expiryDate">item_expiryDate</string>
+    <string name="item_expiryDate">item ExpiryDate</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 </resources>
